@@ -33,3 +33,9 @@ override.tf.json
 
 # generated kubeconfig
 kubeconfig.yaml
+
+
+# node
+node_modules
+package-lock.json
+package.json
