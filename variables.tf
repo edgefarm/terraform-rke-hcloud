@@ -6,11 +6,13 @@ variable "hcloud_secret" {
 variable "hcloud_ssh_key_public" {
   type        = string
   description = "ssh public key you want to use register on your Hetzner Cloud machines."
+  default     = ""
 }
 
 variable "hcloud_ssh_key_private" {
   type        = string
   description = "ssh private key you want to use register on your Hetzner Cloud machines."
+  default     = ""
 }
 
 variable "instance_prefix" {

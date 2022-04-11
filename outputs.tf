@@ -31,3 +31,13 @@ output "lb_address" {
   description = "HCloud loadbalancer address"
   value       = hcloud_load_balancer.rke_lb.ipv4
 }
+
+output "hcloud_ssh_key_public" {
+  description = "registered ssh public key on your Hetzner Cloud machines."
+  value       = var.hcloud_ssh_key_public != "" && var.hcloud_ssh_key_private != "" ? var.hcloud_ssh_key_public : tls_private_key.ssh_key_gen[0].public_key_openssh
+}
+
+output "hcloud_ssh_key_private" {
+  description = "registered ssh private key on your Hetzner Cloud machines."
+  value       = var.hcloud_ssh_key_public != "" && var.hcloud_ssh_key_private != "" ? var.hcloud_ssh_key_private : tls_private_key.ssh_key_gen[0].private_key_openssh
+}
