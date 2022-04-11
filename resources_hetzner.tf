@@ -15,15 +15,9 @@ resource "hcloud_network" "kubernetes_internal_network" {
   }
 }
 
-resource "tls_private_key" "ssh_key_gen" {
-  count     = var.hcloud_ssh_key_public != "" && var.hcloud_ssh_key_private != "" ? 1 : 0
-  algorithm = "RSA"
-  rsa_bits  = 4096
-}
-
 resource "hcloud_ssh_key" "rke_ssh_key" {
   name       = "${var.instance_prefix}-rke-management-key"
-  public_key = var.hcloud_ssh_key_public != "" && var.hcloud_ssh_key_private != "" ? var.hcloud_ssh_key_public : tls_private_key.ssh_key_gen[0].public_key_openssh
+  public_key = local.public_key
   labels = {
     automated = true
   }
@@ -44,7 +38,7 @@ resource "hcloud_server" "rke_nodes" {
     connection {
       type        = "ssh"
       user        = "root"
-      private_key = var.hcloud_ssh_key_public != "" && var.hcloud_ssh_key_private != "" ? var.hcloud_ssh_key_private : tls_private_key.ssh_key_gen[0].private_key_openssh
+      private_key = local.private_key
       host        = self.ipv4_address
     }
   }

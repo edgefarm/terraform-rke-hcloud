@@ -10,7 +10,7 @@ resource "rke_cluster" "rke_cluster" {
       role             = ["controlplane", "worker", "etcd"]
       user             = "root"
       ssh_agent_auth   = true
-      ssh_key          = var.hcloud_ssh_key_private
+      ssh_key          = local.private_key
     }
   }
 

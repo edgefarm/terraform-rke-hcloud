@@ -34,10 +34,10 @@ output "lb_address" {
 
 output "hcloud_ssh_key_public" {
   description = "registered ssh public key on your Hetzner Cloud machines."
-  value       = var.hcloud_ssh_key_public != "" && var.hcloud_ssh_key_private != "" ? var.hcloud_ssh_key_public : tls_private_key.ssh_key_gen[0].public_key_openssh
+  value       = local.public_key
 }
 
 output "hcloud_ssh_key_private" {
   description = "registered ssh private key on your Hetzner Cloud machines."
-  value       = var.hcloud_ssh_key_public != "" && var.hcloud_ssh_key_private != "" ? var.hcloud_ssh_key_private : tls_private_key.ssh_key_gen[0].private_key_openssh
+  value       = local.private_key
 }
