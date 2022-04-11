@@ -16,7 +16,7 @@ resource "hcloud_network" "kubernetes_internal_network" {
 }
 
 resource "hcloud_ssh_key" "rke_ssh_key" {
-  name       = "rancher-management-key"
+  name       = "${var.instance_prefix}-rke-management-key"
   public_key = var.hcloud_ssh_key_public
   labels = {
     automated = true
