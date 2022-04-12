@@ -1,0 +1,46 @@
+repos:
+  # general stuff
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      # Git style
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-vcs-permalinks
+      - id: forbid-new-submodules
+      - id: no-commit-to-branch
+
+      # Common errors
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-executables-have-shebangs
+
+      # Cross platform
+      - id: check-case-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # markdown
+  - repo: https://github.com/markdownlint/markdownlint.git
+    rev: master
+    hooks:
+      - id: markdownlint_docker
+        args: [--style=markdownlint.rb]
+
+  # security scans for infrastructure
+  - repo: https://github.com/bridgecrewio/checkov.git
+    rev: "2.0.1037"
+    hooks:
+      - id: checkov
+
+  # scanning for terraform issues
+  - repo: git://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.50.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_docs
+      - id: terraform_tfsec
